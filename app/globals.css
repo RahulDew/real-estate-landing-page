@@ -3,14 +3,28 @@
 @tailwind utilities;
 
 :root {
-  --background: #ffffff;
+  /* --primary: #0070f3; */
+  --primary: #00817f;
+  /* --secondary: #f81ce5; */
+  --secondary: #bda588;
+  /* --background: #ffffff; */
+  --background: #f7f2ec;
+  --background-secondary: #c3c3c3;
   --foreground: #171717;
+  --foreground-secondary: #4f4f4f;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
+    /* --primary: #237fe7; */
+    --primary: #00817f;
+    /* --secondary: #f450e7; */
+    --secondary: #bda588;
+    /* --background: #0a0a0a; */
+    --background: #0f0f0f;
+    --backgroundSecondary: #343434;
     --foreground: #ededed;
+    --foreground-secondary: #b4b4b4;
   }
 }
 
@@ -18,4 +32,32 @@ body {
   color: var(--foreground);
   background: var(--background);
   font-family: Arial, Helvetica, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+@keyframes blurIn {
+  0% {
+    filter: blur(10px);
+  }
+  100% {
+    filter: blur(0);
+  }
+}
+
+.animate-blurIn {
+  animation: blurIn 0.7s ease-out forwards;
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.animate-fadeIn {
+  animation: fadeIn 0.7s ease-out forwards;
 }

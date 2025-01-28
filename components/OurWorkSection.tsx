@@ -2,6 +2,8 @@
 import Image from "next/image";
 import React from "react";
 import { Carousel, Card } from "@/components/ui/cards-carousel";
+import Heading from "./ui/heading";
+import { ourWorkHeading } from "@/data/worksData";
 
 export function OurWorkSection() {
   const cards = data.map((card, index) => (
@@ -9,10 +11,12 @@ export function OurWorkSection() {
   ));
 
   return (
-    <div className="w-full h-full py-20">
-      <h2 className="max-w-7xl pl-4 mx-auto text-xl md:text-5xl font-bold text-neutral-800 dark:text-neutral-200 font-sans">
-        Get to know your iSad.
-      </h2>
+    <div className="w-full h-full space-y-2">
+      <Heading
+        alignment="left"
+        title={ourWorkHeading.title}
+        description={ourWorkHeading.description}
+      />
       <Carousel items={cards} />
     </div>
   );
