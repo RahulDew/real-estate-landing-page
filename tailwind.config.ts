@@ -14,53 +14,30 @@ export default {
         background: "var(--background)",
         backgroundSecondary: "var(--background-secondary)",
         foreground: "var(--foreground)",
+        foregroundSecondary: "var(--foreground-secondary)",
+      },
+      backgroundImage: {
+        "custom-gradient":
+          "linear-gradient(180deg, rgba(0,0,0,0.4105975153733369) 0%, rgba(0,0,0,0) 55%, rgba(0,0,0,0.7299252464657738) 100%)",
       },
       boxShadow: {
         input: `0px 2px 3px -1px rgba(0,0,0,0.1), 0px 1px 0px 0px rgba(25,28,33,0.02), 0px 0px 0px 1px rgba(25,28,33,0.08)`,
       },
       animation: {
-        blobanimate: "movement 4s ease-in-out infinite both alternate",
-        scroll:
-          "scroll var(--animation-duration, 40s) var(--animation-direction, forwards) linear infinite",
-        shimmer: "shimmer 2s linear infinite",
+        marquee: "marquee var(--duration) linear infinite",
+        "marquee-vertical": "marquee-vertical var(--duration) linear infinite",
       },
       keyframes: {
-        movement: {
-          "0%": { borderRadius: "100% 100% 100% 100% / 100% 100% 100% 100%" },
-          "100%": {
-            borderRadius: "33% 67% 70% 30% / 30% 40% 70% 70%",
-          },
-          "20%": {
-            borderRadius: "37% 63% 51% 49% / 37% 35% 35% 63%",
-          },
-          "40%": {
-            borderRadius: "36% 64% 64% 36% / 64% 48% 52% 55%",
-          },
-          "60%": {
-            borderRadius: "37% 63% 51% 49% / 45% 45% 70% 73%",
-          },
-          "80%": {
-            borderRadius: "40% 60% 42% 58% / 51% 51% 49% 59%",
-          },
+        marquee: {
+          from: { transform: "translateX(0)" },
+          to: { transform: "translateX(calc(-100% - var(--gap)))" },
         },
-        scroll: {
-          to: {
-            transform: "translate(calc(-50% - 0.5rem))",
-          },
-        },
-        shimmer: {
-          from: {
-            backgroundPosition: "0 0",
-          },
-          to: {
-            backgroundPosition: "-200% 0",
-          },
+        "marquee-vertical": {
+          from: { transform: "translateY(0)" },
+          to: { transform: "translateY(calc(-100% - var(--gap)))" },
         },
       },
     },
   },
   plugins: [],
 } satisfies Config;
-
-
-
