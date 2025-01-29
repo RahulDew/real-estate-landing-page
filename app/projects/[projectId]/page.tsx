@@ -10,20 +10,6 @@ import { usePathname } from "next/navigation";
 import { replaceSpacesWithHyphens } from "@/lib/utils";
 import { IconLoader2 } from "@tabler/icons-react";
 
-const propertyData: IProjectInfo = {
-  id: 1101,
-  imgUrl:
-    "https://images.unsplash.com/photo-1554080353-a576cf803bda?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=3387&q=80",
-  title: "Modern Urban Apartment",
-  description:
-    "A stylish urban apartment in the city center. Lorem ipsum dolor sit amet consectetur adipisicing elit. Repudiandae repellendus aperiam excepturi sint at soluta facilis numquam dignissimos, error vero iusto saepe eius nostrum asperiores consequuntur necessitatibus dolores nulla officiis? Lorem ipsum dolor sit amet consectetur adipisicing elit. Repudiandae repellendus aperiam excepturi sint at soluta facilis numquam dignissimos, error vero iusto saepe eius nostrum asperiores consequuntur necessitatibus dolores nulla officiis? Lorem ipsum dolor sit amet consectetur adipisicing elit. Repudiandae repellendus aperiam excepturi sint at soluta facilis numquam dignissimos, error vero iusto saepe eius nostrum asperiores consequuntur necessitatibus dolores nulla officiis? Lorem ipsum dolor sit amet consectetur adipisicing elit. Repudiandae repellendus aperiam excepturi sint at soluta facilis numquam dignissimos, error vero iusto saepe eius nostrum asperiores consequuntur necessitatibus dolores nulla officiis?",
-  rating: "4.5/5",
-  location: "New York City, NY",
-  date: "2025-01-01",
-  price: "$1,200,000",
-  area: "1,200 sq. ft",
-};
-
 export default function ProjectDetails() {
   const [project, setProject] = useState<IProjectInfo | null>(null);
   const [loading, setLoading] = useState(true);
