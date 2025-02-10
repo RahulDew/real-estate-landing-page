@@ -3,6 +3,8 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import { PopupProvider } from "@/context/PopUpContext";
+import PopUpContactForm from "@/components/PopUpContactForm";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -29,9 +31,12 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <Navbar />
-        <main className="bg-background text-foreground">{children}</main>
-        <Footer />
+        <PopupProvider>
+          <Navbar />
+          <PopUpContactForm />
+          <main className="bg-background text-foreground">{children}</main>
+          <Footer />
+        </PopupProvider>
       </body>
     </html>
   );

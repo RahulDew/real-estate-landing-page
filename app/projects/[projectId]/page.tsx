@@ -83,18 +83,6 @@ export default function ProjectDetails() {
                 />
                 <div className="absolute inset-0 bg-black/20" />
               </motion.div>
-
-              {/* Price Tag */}
-              <motion.div
-                initial={{ opacity: 0, x: -50 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: 0.3, duration: 0.6 }}
-                className="absolute bottom-6 right-6 bg-background px-6 py-3 rounded-full shadow-lg"
-              >
-                <span className="text-2xl font-bold text-primary">
-                  {project.price}
-                </span>
-              </motion.div>
             </div>
 
             <div className="p-8">
@@ -108,15 +96,6 @@ export default function ProjectDetails() {
                 >
                   {project.title}
                 </motion.h1>
-                <motion.div
-                  initial={{ opacity: 0, scale: 0.8 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  transition={{ delay: 0.5, duration: 0.6 }}
-                  className="flex items-center gap-2 bg-primary/10 px-4 py-2 rounded-full"
-                >
-                  <Star className="w-5 h-5 text-yellow-500 fill-yellow-500" />
-                  <span className="font-semibold">{project.rating}</span>
-                </motion.div>
               </div>
 
               {/* Property Details Grid */}
@@ -130,14 +109,7 @@ export default function ProjectDetails() {
                   <MapPin className="w-5 h-5" />
                   <span>{project.location}</span>
                 </div>
-                <div className="flex items-center gap-3 opacity-75">
-                  <Calendar className="w-5 h-5" />
-                  <span>Available from {project.date}</span>
-                </div>
-                <div className="flex items-center gap-3 opacity-75">
-                  <Ruler className="w-5 h-5" />
-                  <span>{project.area}</span>
-                </div>
+                
               </motion.div>
 
               {/* Description */}
@@ -162,7 +134,7 @@ export default function ProjectDetails() {
                 className="mt-8"
               >
                 <CalScheduler
-                  label="Schedule a call"
+                  label="Schedule the visit"
                   className="w-full md:w-auto bg-primary text-white px-8 rounded-lg text-lg font-semibold flex items-center justify-center gap-2"
                 />
               </motion.div>

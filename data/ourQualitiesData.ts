@@ -6,7 +6,7 @@ export interface IQualities {
 export const qualitiesHeading = {
   title: "Building Trust, Delivering Excellence",
   description:
-    "We specialize in delivering top-tier real estate solutions, including residential, commercial, rental, and maintenance services. Your dream property is just a step away.",
+    "Wallfort Properties, Central India’s most trusted real estate brand. With over 30+ years of experience, we have redefined luxury living and commercial spaces in Raipur, Durg, and beyond.",
 };
 
 export const qualitiesSectionImage = {

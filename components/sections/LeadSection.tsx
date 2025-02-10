@@ -5,7 +5,7 @@ export default function HighlightSection() {
     { title: "3000+", description: "Constructed Units" },
     { title: "30+", description: "Lakh Constructed in Sq.Ft." },
     { title: "25+", description: "Years of Experience" },
-    { title: "15+", description: "Projects in Chhattisgarh" },
+    { title: "21+", description: "Projects in Chhattisgarh" },
   ];
 
   const data = {
@@ -46,7 +46,7 @@ export default function HighlightSection() {
             className="h-20 w-20"
           />
           <span className="text-3xl font-extrabold text-foreground">
-            Wallfort Heights
+            Wallfort Projects
           </span>
         </div>
         {/* Statistics Section */}

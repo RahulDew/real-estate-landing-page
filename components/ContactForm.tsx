@@ -4,73 +4,72 @@ import { Label } from "@/components/ui/label";
 import { Input, Textarea } from "@/components/ui/input";
 import { cn } from "@/lib/utils";
 import { useForm } from "react-hook-form";
+import { z } from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
 
-type FormInput = {
-  name: string;
-  email: string;
-  message: string;
-};
+const contactSchema = z.object({
+  name: z
+    .string()
+    .min(2, "Name must be at least 2 characters")
+    .max(50, "Name can't exceed 50 characters"),
+  email: z.string().email("Invalid email address"),
+  message: z
+    .string()
+    .min(10, "Message must be at least 10 characters")
+    .max(500, "Message can't exceed 500 characters"),
+});
+
+type FormInput = z.infer<typeof contactSchema>;
 
 export default function ContactForm() {
   const [error, setError] = useState<string | null>(null);
+  const [successMessage, setSuccessMessage] = useState("");
 
   const {
     register,
     handleSubmit,
-    formState: { isSubmitting },
+    formState: { errors, isSubmitting },
     reset,
-  } = useForm<FormInput>();
+  } = useForm<FormInput>({
+    resolver: zodResolver(contactSchema),
+  });
 
   async function onSubmit(formData: FormInput) {
     setError(null);
     try {
-      if (formData.name && formData.email && formData.message) {
-        await fetch("/api/contact", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      });
 
-          body: JSON.stringify({
-            name: formData.name,
-            email: formData.email,
-            message: formData.message,
-          }),
-        }).then(async (res) => {
-          // server response
-          const response = await res.json();
-          if (response.status === 250) {
-            alert("Your contact is recorded we'll get back to you!");
-          } else {
-            alert(`${response.msg}. Please try again`);
-            setError(`${response.msg}. Please try again`);
-          }
-          setError(null);
-        });
+      if (response.ok) {
+        setSuccessMessage("We got your lead. We will get back to you soon!");
+        reset();
       } else {
-        setError("Please enter all the details!");
+        setError("Failed to submit form. Try again!");
+        console.error("Failed to submit form");
       }
     } catch (error: any) {
-      setError("Email sent failed. please try again !");
-    } finally {
-      reset();
+      setError("Error submitting the form. Try again!");
+      console.error("Error submitting the form:", error);
     }
   }
 
   return (
-    <div className="max-w-2xl w-full mx-auto rounded-lg p-5 md:p-8 shadow-input bg-bgSecondary border border-borderColor backdrop:blur-3xl">
-      <form
-        className="my-8 space-y-8 bg-bgSecondary"
-        onSubmit={handleSubmit(onSubmit)}
-      >
+    <div className="w-full mx-auto rounded-xl p-5 md:p-8 shadow-input bg-neutral-800 text-foreground">
+      <form className="my-2 space-y-4" onSubmit={handleSubmit(onSubmit)}>
         <LabelInputContainer>
-          <Label htmlFor="firstname">Your Name</Label>
+          <Label htmlFor="name">Your Name</Label>
           <Input
             {...register("name")}
-            id="firstname"
+            id="name"
             placeholder="Tyler Durden"
             type="text"
           />
+          {errors.name && (
+            <p className="text-sm text-red-600">{errors.name.message}</p>
+          )}
         </LabelInputContainer>
 
         <LabelInputContainer className="mb-4">
@@ -81,6 +80,9 @@ export default function ContactForm() {
             placeholder="projectmayhem@fc.com"
             type="email"
           />
+          {errors.email && (
+            <p className="text-sm text-red-600">{errors.email.message}</p>
+          )}
         </LabelInputContainer>
 
         <LabelInputContainer className="mb-4">
@@ -90,6 +92,9 @@ export default function ContactForm() {
             id="message"
             placeholder="Hi... Want to meet"
           />
+          {errors.message && (
+            <p className="text-sm text-red-600">{errors.message.message}</p>
+          )}
         </LabelInputContainer>
 
         <button
@@ -98,12 +103,14 @@ export default function ContactForm() {
           disabled={isSubmitting}
         >
           {isSubmitting ? "Sending..." : "CONNECT"}
-          {/* CONNECT &rarr; */}
           <BottomGradient />
         </button>
       </form>
       <p className="text-sm font-medium text-left text-red-600 h-4 my-0">
         {error && error}
+      </p>
+      <p className="text-sm font-medium text-left text-green-600 h-4 my-0">
+        {successMessage && successMessage}
       </p>
     </div>
   );

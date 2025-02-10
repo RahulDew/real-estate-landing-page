@@ -1,57 +1,7 @@
 import { cn } from "@/lib/utils";
 import { Marquee } from "./ui/Marquee";
-import { title } from "process";
 import Heading from "./ui/heading";
-
-const testimonialsHeading = {
-  title: "Testimonials",
-  description:
-    "Hear what our Our customers and ambassadors have to say about our services.",
-};
-
-const reviews = [
-  {
-    name: "Jack",
-    email: "@jack",
-    testimonial:
-      "I've never seen anything like this before. It's amazing. I love it.",
-    img: "https://plus.unsplash.com/premium_photo-1689539137236-b68e436248de?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OXx8cGVyc29ufGVufDB8fDB8fHww",
-  },
-  {
-    name: "Jill",
-    email: "@jill",
-    testimonial: "I don't know what to say. I'm speechless. This is amazing.",
-    img: "https://plus.unsplash.com/premium_photo-1689539137236-b68e436248de?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OXx8cGVyc29ufGVufDB8fDB8fHww",
-  },
-  {
-    name: "John",
-    email: "@john",
-    testimonial:
-      "I'm at a loss for words. This is amazing. I love it. I'm at a loss for words. This is amazing. I love it.",
-    img: "https://plus.unsplash.com/premium_photo-1689539137236-b68e436248de?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OXx8cGVyc29ufGVufDB8fDB8fHww",
-  },
-  {
-    name: "Jane",
-    email: "@jane",
-    testimonial:
-      "I'm at a loss for words. This is amazing. I love it. I'm at a loss for words. This is amazing. I love it.",
-    img: "https://plus.unsplash.com/premium_photo-1689539137236-b68e436248de?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OXx8cGVyc29ufGVufDB8fDB8fHww",
-  },
-  {
-    name: "Jenny",
-    email: "@jenny",
-    testimonial:
-      "I'm at a loss for words. This is amazing. I love it. I'm at a loss for words. This is amazing. I love it. I'm at a loss for words. This is amazing. I love it. ",
-    img: "https://plus.unsplash.com/premium_photo-1689539137236-b68e436248de?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OXx8cGVyc29ufGVufDB8fDB8fHww",
-  },
-  {
-    name: "James",
-    email: "@james",
-    testimonial:
-      "I'm at a loss for words. This is amazing. I love it. I'm at a loss for words. This is amazing. I love it. I'm at a loss for words. This is amazing. I love it. ",
-    img: "https://plus.unsplash.com/premium_photo-1689539137236-b68e436248de?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OXx8cGVyc29ufGVufDB8fDB8fHww",
-  },
-];
+import { testimonialsHeading, reviews } from "@/data/TestimonialsData";
 
 const firstRow = reviews.slice(0, reviews.length / 2);
 const secondRow = reviews.slice(reviews.length / 2);
@@ -59,12 +9,12 @@ const secondRow = reviews.slice(reviews.length / 2);
 const ReviewCard = ({
   img,
   name,
-  email,
+  occupation,
   testimonial,
 }: {
   img: string;
   name: string;
-  email: string;
+  occupation: string;
   testimonial: string;
 }) => {
   return (
@@ -92,7 +42,7 @@ const ReviewCard = ({
           <figcaption className="text-sm font-medium dark:text-white">
             {name}
           </figcaption>
-          <p className="text-xs font-medium dark:text-white/40">{email}</p>
+          <p className="text-xs font-medium dark:text-white/40">{occupation}</p>
         </div>
       </div>
       <blockquote className="mt-2 text-sm">{testimonial}</blockquote>
@@ -107,12 +57,12 @@ export function TestimonialSection() {
       <div className="relative flex h-[500px] w-full flex-col items-center justify-center overflow-hidden rounded-lg  md:shadow-xl">
         <Marquee pauseOnHover className="[--duration:20s]">
           {firstRow.map((review) => (
-            <ReviewCard key={review.email} {...review} />
+            <ReviewCard key={review.id} {...review} />
           ))}
         </Marquee>
         <Marquee reverse pauseOnHover className="[--duration:20s]">
           {secondRow.map((review) => (
-            <ReviewCard key={review.email} {...review} />
+            <ReviewCard key={review.id} {...review} />
           ))}
         </Marquee>
         <div className="pointer-events-none absolute inset-y-0 left-0 w-1/3 bg-gradient-to-r from-background dark:from-background"></div>

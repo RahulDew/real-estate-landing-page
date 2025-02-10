@@ -13,17 +13,17 @@ export default function page() {
       </div>
 
       <div className="w-11/12 h-full relative m-auto">
-        <div className="sm:p-10 md:p-16  sm:bg-bgPrimary text-white md:text-white flex max-lg:flex-col justify-center items-start gap-10 rounded-lg">
+        <div className="sm:p-10 md:p-16  sm:bg-bgPrimary text-foreground flex max-lg:flex-col justify-center items-start gap-10 rounded-lg">
           <div className="lg:w-10/12 space-y-5 text-center lg:text-left">
             <h3 className="text-3xl md:text-4xl font-bold">
               Let's discuss your project
             </h3>
             <p className="text-lg">
               We are here to help and answer any question you might have. We
-              look forward to hearing from you :)
+              look forward to hearing from you.
             </p>
             <p className="font-semibold text-xl max-lg:hidden">
-              Connect with us :)
+              Connect with us
             </p>
           </div>
           <div className="w-full">

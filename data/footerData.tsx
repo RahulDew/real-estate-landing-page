@@ -9,8 +9,7 @@ export const FooterData = {
   footerLogoData: {
     logo: "https://assets-netstorage.groww.in/stock-assets/logos2/WallfortFin_54102882444_7773.png",
     logoText: "Wallfort Heights",
-    textData:
-      "We offer solutions for startups and scale-ups to access top-tier software development and technology leadership through cost-effective partnerships.",
+    textData: " Central India’s most trusted real estate brand. With over 30+ years of experience, we have redefined luxury living and commercial spaces in Raipur, Durg, and beyond."
   },
   socialIcons: [
     {

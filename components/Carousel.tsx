@@ -8,11 +8,10 @@ import {
   IconPhoneCall,
   IconMail,
   IconLocationBolt,
-  IconLocationShare,
   IconPremiumRights,
-  IconLocationCode,
   IconMapPin,
 } from "@tabler/icons-react";
+import Link from "next/link";
 
 // Define the button type
 type ButtonType = {
@@ -20,6 +19,7 @@ type ButtonType = {
   label: string;
   icon: any;
   ariaLabel: string;
+  link?: string;
 };
 
 // Array of button data
@@ -29,18 +29,21 @@ const buttons: ButtonType[] = [
     label: "Call",
     icon: <IconPhoneCall size={20} className="text-white" />,
     ariaLabel: "Call",
+    link : "tel:+1234567890"
   },
   {
     id: 2,
     label: "Email",
     icon: <IconMail size={20} className="text-white" />,
     ariaLabel: "Email",
+    link : "mailto: heyrahulbro@gmail.com"
   },
   {
     id: 3,
     label: "Other",
     icon: <IconLocationBolt size={20} className="text-white" />,
     ariaLabel: "Other",
+    link : "https://www.google.com/maps/place/Magneto+The+Mall/@21.236388,81.661667,17z/data=!3m1!4b1"
   },
 ];
 
@@ -125,7 +128,7 @@ const Carousel = () => {
           <div>
             <PropertyStack />
             <p className="text-bold flex items-center gap-2 opacity-60 text-white">
-              {"Explore premium and best properties and get the best deals"}
+              {"Explore premium properties at Wallfort"}
             </p>
           </div>
         </div>
@@ -142,13 +145,15 @@ const IconButtons = ({ isTransitioning }: { isTransitioning: boolean }) => {
       className={`flex flex-col gap-4 text-white transition-opacity duration-700`}
     >
       {buttons.map((button) => (
-        <button
+        <Link
+          href={button.link || "#"}
+          target="_blank"
           key={button.id}
           className="p-2 border-2 border-white/100 rounded-full bg-white/25 hover:bg-primary transition duration-300"
           aria-label={button.ariaLabel}
         >
           {button.icon}
-        </button>
+        </Link>
       ))}
     </div>
   );

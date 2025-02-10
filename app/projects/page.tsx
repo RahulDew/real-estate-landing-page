@@ -1,8 +1,11 @@
 import React from "react";
 import { IProjectInfo, allProjectsInfo } from "@/data/projectsData";
 import ProjectCard from "@/components/ui/project-card";
+import client from "@/lib/sanity";
 
-export default function ProjectsPage() {
+export default async function ProjectsPage() {
+  const PROJECTS: IProjectInfo[] = await client.fetch(`*[_type == "project"]`);
+  console.log(PROJECTS);
   return (
     <section
       id="services"
