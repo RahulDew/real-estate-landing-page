@@ -2,16 +2,16 @@
 
 import React from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { usePopup } from "@/context/PopUpContext";
 import ContactForm from "./ContactForm";
 import { IconX } from "@tabler/icons-react";
+import { useGlobalContext } from "@/context/GlobalContext";
 
 const GlobalPopup: React.FC = () => {
-  const { isOpen, closePopup } = usePopup();
+  const { isPopUpOpen, closePopup } = useGlobalContext();
 
   return (
     <AnimatePresence>
-      {isOpen && (
+      {isPopUpOpen && (
         <motion.section
           className="fixed inset-0 z-30 flex items-center justify-center bg-black bg-opacity-50"
           initial={{ opacity: 0 }}

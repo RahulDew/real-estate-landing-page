@@ -1,13 +1,15 @@
 "use client";
 
-import { useState } from "react";
 import { motion } from "framer-motion";
 import Image from "next/image";
 import { reveal } from "@/lib/utils";
 import Link from "next/link";
 import { NavbarData } from "@/data/navbarData";
+import { useGlobalContext } from "@/context/GlobalContext";
+import { IconX } from "@tabler/icons-react";
+import CalScheduler from "./CalSheduler";
 
-const sidebar = {
+const mobileMenuVarients = {
   open: (height = 1000) => ({
     clipPath: `circle(${height * 2 + 200}px at 100% 0)`,
     transition: {
@@ -27,83 +29,77 @@ const sidebar = {
 };
 
 const MobileNav = () => {
-  const [isOpen, setIsOpen] = useState(true);
-
-  const handleMenuOpen = () => {
-    setIsOpen((prev) => !prev);
-  };
+  const { isMobileMenuOpen, handleToggleMobileMenu } = useGlobalContext();
 
   return (
     <motion.nav
       initial={false}
-      animate={isOpen ? "open" : "closed"}
+      animate={isMobileMenuOpen ? "open" : "closed"}
       className={`fixed h-screen inset-0 z-50 w-full md:hidden ${
-        isOpen ? "" : "pointer-events-none"
+        isMobileMenuOpen ? "" : "pointer-events-none"
       }`}
     >
       <motion.div
-        className="absolute inset-0 right-0 w-full bg-white text-black"
-        variants={sidebar}
+        className="absolute inset-0 right-0 w-full bg-background"
+        variants={mobileMenuVarients}
       />
-      {isOpen && (
-        <motion.ul
-          variants={reveal}
-          initial={"hiddenVarient"}
-          animate={"revealedVarient"}
-          transition={{ delay: 0.3, duration: 0.5 }}
-          className="absolute w-full h-full grid place-items-center gap-10 px-10 py-16 overflow-y-auto"
-        >
-          <Link
-            href={"/"}
-            className="flex justify-center items-center gap-2 p-3 rounded-md"
+      {isMobileMenuOpen && (
+        <>
+          <motion.ul
+            variants={reveal}
+            initial={"hiddenVarient"}
+            animate={"revealedVarient"}
+            transition={{ delay: 0.3, duration: 0.5 }}
+            className="absolute w-full h-full grid place-items-center gap-10 px-10 py-16 overflow-y-auto"
           >
-            <Image
-              src={NavbarData.navbarLogo}
-              alt="PropDeal Logo"
-              priority
-              width={30}
-              height={30}
-              className=""
+            <Link
+              href={"/"}
+              className="flex justify-center items-center gap-2 p-3 rounded-md"
+            >
+              <Image
+                src={NavbarData.navbarLogo}
+                alt="PropDeal Logo"
+                priority
+                width={30}
+                height={30}
+                className=""
+              />
+              <p className="text-[27px] font-extrabold gradient_blue_text">
+                {NavbarData.logoName}
+              </p>
+            </Link>
+            <div className="space-y-12">
+              {NavbarData.navLinks.map((navlink, index) => (
+                <motion.li
+                  key={index}
+                  variants={reveal}
+                  initial={"hiddenVarient"}
+                  animate={"revealedVarient"}
+                  transition={{ delay: index * 0.1, duration: 0.5 }}
+                  onClick={handleToggleMobileMenu}
+                  className="font-semibold text-2xl text-center hover:text-primary duration-300"
+                >
+                  <Link href={`${navlink.link}`}>{navlink.name}</Link>
+                </motion.li>
+              ))}
+            </div>
+            <CalScheduler
+              label="Let's Connect"
+              isLabelNeeded={true}
+              isMobileMenu={true}
             />
-            <p className="text-[27px] font-extrabold gradient_blue_text">
-              {NavbarData.logoName}
-            </p>
-          </Link>
-          <div className="space-y-12">
-            {NavbarData.navLinks.map((navlink, index) => (
-              <motion.li
-                key={index}
-                variants={reveal}
-                initial={"hiddenVarient"}
-                animate={"revealedVarient"}
-                transition={{ delay: index * 0.1, duration: 0.5 }}
-                onClick={handleMenuOpen}
-                className="font-semibold text-2xl text-center hover:text-primary duration-300"
-              >
-                <Link href={`${navlink.link}`}>{navlink.name}</Link>
-              </motion.li>
-            ))}
-          </div>
-        </motion.ul>
+          </motion.ul>
+          {/* Mobile Menu toggle */}
+          <button
+            onClick={handleToggleMobileMenu}
+            className="flex justify-center items-center md:hidden pointer-events-auto absolute top-5 right-5 z-30"
+          >
+            <IconX size={35} className="text-foreground" />
+          </button>
+        </>
       )}
-      {/* Mobile Menu toggle */}
-      <MenuToggle handleClick={handleMenuOpen} />
     </motion.nav>
   );
 };
 
 export default MobileNav;
-
-const MenuToggle = ({ handleClick }: { handleClick: () => void }) => (
-  <button
-    onClick={handleClick}
-    className="pointer-events-auto absolute right-4 top-[18px] z-30"
-  >
-    <Image
-      src={NavbarData.sidebarIcon}
-      alt={"Toggle"}
-      priority
-      className="w-7"
-    />
-  </button>
-);

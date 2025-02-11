@@ -1,5 +1,4 @@
 import HeaderSection from "@/components/HeaderSection";
-import { OurWorkSection } from "@/components/OurWorkSection";
 import LeadSection from "@/components/sections/LeadSection";
 import OurQualitiesSection from "@/components/sections/OurQualitiesSection";
 import ProjectsSection from "@/components/sections/ProjectsSection";
